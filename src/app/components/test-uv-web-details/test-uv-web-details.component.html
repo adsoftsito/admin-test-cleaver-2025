@@ -1,0 +1,56 @@
+<div *ngIf="currentTest" class="edit-form">
+  <div class="d-flex justify-content-between align-items-center">
+    <h4>Datos del estudiante</h4>
+
+    <!-- Botón de tres puntitos (Opciones) -->
+    <div class="dropdown">
+      <button class="btn btn-light" (click)="toggleDropdown()">
+        &#x22EE;
+      </button>
+      <ul class="dropdown-menu" [class.show]="isDropdownOpen">
+        <li><a class="dropdown-item" (click)="deleteTest()">Eliminar test</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    <form class="form-center">
+      <div class="form-group">
+        <label for="appPaterno"><strong>Apellido paterno:</strong></label>
+        <input type="text" class="form-control" id="appPaterno" disabled [(ngModel)]="currentTest.appPaterno"
+          name="appPaterno" />
+
+        <label for="appMaterno"><strong>Apellido materno:</strong></label>
+        <input type="text" class="form-control" id="appMaterno" disabled [(ngModel)]="currentTest.appMaterno"
+          name="appMaterno" />
+
+        <label for="nombre"><strong>Nombre:</strong></label>
+        <input type="text" class="form-control" id="nombre" disabled [(ngModel)]="currentTest.nombre" name="nombre" />
+      </div>
+    </form>
+
+    <!-- Resultados -->
+    <div class="resultados">
+      <p><strong>Valores iniciales:</strong></p>
+      <p>{{ MD }}, {{ MI }}, {{ MS }}, {{ MC }}</p>
+      <p>{{ LD }}, {{ LI }}, {{ LS }}, {{ LC }}</p>
+      <p>{{ TotD }}, {{ TotI }}, {{ TotS }}, {{ TotC }}</p>
+
+      <p><strong>Resultados intermedios:</strong></p>
+      <p>{{ ResultMD }} - {{ ResultMI }} - {{ ResultMS }} - {{ ResultMC }}</p>
+      <p>{{ ResultLD }} - {{ ResultLI }} - {{ ResultLS }} - {{ ResultLC }}</p>
+      <p>{{ ResultTotD }} - {{ ResultTotI }} - {{ ResultTotS }} - {{ ResultTotC }}</p>
+
+      <p><strong>Resultados finales:</strong></p>
+      <p>{{ test.FinalT }} - {{ test.FinalM }} - {{ test.FinalL }}</p>
+      <p>{{ test.FinalResult }}</p>
+      <p>{{ test.Result }}</p>
+      <p>{{ test.message }}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!currentTest">
+  <br />
+  <p>Cannot access this Test...</p>
+</div>
