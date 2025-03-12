@@ -1,0 +1,11 @@
+.list {
+  text-align: left;
+  max-width: 750px;
+  margin: auto;
+}
+
+.list-group-item.active {
+  background-color: #28a745 !important; /* Verde */
+  color: white !important;
+  font-weight: bold;
+}

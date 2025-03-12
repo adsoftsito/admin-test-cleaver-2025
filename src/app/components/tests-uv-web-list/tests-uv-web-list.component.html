@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <!-- Sección de filtros y lista de estudiantes -->
+    <div class="col-md-6">
+      <fieldset class="border p-3">
+        <legend class="w-auto">Filtrar estudiantes</legend>
+
+        <!-- Periodo -->
+        <div class="form-group">
+          <label for="periodo">Periodo</label>
+          <select class="form-control" id="periodo" required [(ngModel)]="periodo" name="periodo"
+            (change)="retrieveTestsByProgram()">
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+          </select>
+        </div>
+
+        <!-- Facultad -->
+        <div class="form-group">
+          <label for="facultad">Facultad</label>
+          <select class="form-control" id="facultad" required [(ngModel)]="facultad" name="facultad"
+            (change)="retrieveTestsByProgram()">
+            <option value="fnt">Facultad de Negocios y Tecnologías, USBI Ixtac</option>
+            <option value="fi">Facultad de Ingeniería, USBI Ixtac</option>
+          </select>
+        </div>
+
+        <!-- Carrera -->
+        <div class="form-group">
+          <label for="programaInteres">Carrera</label>
+          <select class="form-control" id="programaInteres" required [(ngModel)]="programaInteres"
+            name="programaInteres" (change)="retrieveTestsByProgram()">
+            <option value="LIS">Lic. Ingeniería de Software</option>
+            <option value="LC">Lic. Contaduría</option>
+            <option value="LAE">Lic. Administración</option>
+            <option value="LGE">Lic. Gestión y Dirección de Negocios</option>
+            <option value="LTIO">Lic. Tecnologías de Información Organizacional</option>
+            <option value="LPOL">Lic. Ciencias Políticas y Gestión Pública</option>
+            <option value="MDEIT">Maestría en Dirección Estratégica e Innovación Tecnológica</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <!-- Lista de estudiantes -->
+      <h3 class="mt-3">{{n}} estudiantes</h3>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let test of tests; let i = index" [class.active]="i == currentIndex"
+          (click)="setActiveTest(test, i)">
+          {{i+1}} {{test.appPaterno}}-{{test.appMaterno}}, {{test.nombre}} : {{ test.Result }} / {{test.message}}
+        </li>
+      </ul>
+    </div>
+
+    <!-- Sección de detalles del estudiante -->
+    <div class="col-md-6">
+      <div *ngIf="currentTest">
+        <app-test-uv-web-details (refreshList)="refreshList()" [test]="currentTest"></app-test-uv-web-details>
+      </div>
+      <div *ngIf="!currentTest">
+        <br />
+        <p>Seleccione un estudiante ...</p>
+      </div>
+    </div>
+  </div>
+</div>
